@@ -1,0 +1,17 @@
+services:
+  graphql-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    environment:
+      ConnectionStrings__DefaultConnection: "Host=${DB_HOST};Port=${DB_PORT};Database=${DB_NAME};Username=${DB_USER};Password=${DB_PASSWORD}"
+      ASPNETCORE_ENVIRONMENT: Development
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    volumes:
+      - .:/src
+      - obj_data:/src/obj
+      - bin_data:/src/bin
+
+volumes:
+  obj_data:
+  bin_data:
